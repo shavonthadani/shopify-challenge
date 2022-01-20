@@ -23,37 +23,40 @@
         <td>{{item.product_stock}}</td>
         <td>{{item.date}}</td>
         <td>
-          <button type="button" name="record" id="start-record-btn" class="btn btn-sm" onClick="editProduct(event)">
+            <script>
+      window.identification = ''
+      function editProduct(id,name,data,stock) {
+        window.identification = id
+        document.getElementById("submit").style.display = "none";
+        document.getElementById("update").style.visibility = "visible";
+        document.getElementById("item_name").innerHTML = name;
+        document.getElementById("item_data").innerHTML = data;
+        document.getElementById("item_stock").innerHTML = stock;
+       }
+       function update() {
+        document.getElementById("submit").click();
+        deleteProduct(window.identification);
+       }
+       function to_csv(){
+        window.location.href = "/to-csv";
+       }
+      </script>
+
+          <button type="button" name="record" id="start-record-btn" class="btn btn-sm" onClick="editProduct('{{item.id}}','{{item.product_name}}','{{item.product_data}}','{{item.product_stock}}')">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
               <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
             </svg>
             <span class="visually-hidden"></span>
           </button>
-        <button type="button" class="close" onClick="deleteProduct({{item.id}})">
+        <button type="button" class="close" onClick="deleteProduct('{{item.id}}')">
           <span type="button" class="close">
             &times;
           </span>
         </button>
       </td>
       </tr>
-      <script>
-  
-      function editProduct(event) {
-        document.getElementById("submit").style.display = "none";
-        document.getElementById("update").style.visibility = "visible";
-        document.getElementById("item_name").innerHTML = '{{item.product_name}}';
-        document.getElementById("item_data").innerHTML = '{{item.product_data}}';
-        document.getElementById("item_stock").innerHTML = '{{item.product_stock}}';
-       }
-       function update() {
-        document.getElementById("submit").click();
-        deleteProduct('{{item.id}}');
-       }
-       function to_csv(){
-        window.location.href = "/to-csv";
-       }
-      </script>
+
         {% endfor %}
     </tbody>
   </table>
@@ -62,30 +65,30 @@
     <h3 align="center">Add Item</h3>
     <div class="form-group">
       <label for="item_name">Item Name</label>
-      <textarea 
-      type="text" 
-      class ="form-control" 
-      id="item_name" 
-      name="item_name" 
+      <textarea
+      type="text"
+      class ="form-control"
+      id="item_name"
+      name="item_name"
       placeholder="Enter the Item Name"></textarea>
 
       <label for="item_data">Item Description</label>
-      <textarea 
-      class ="form-control" 
-      id="item_data" 
-      name="item_data" 
+      <textarea
+      class ="form-control"
+      id="item_data"
+      name="item_data"
       placeholder="Enter the Item Description"></textarea>
 
       <label for="item_stock">Item Stock</label>
-      <textarea 
-      class ="form-control" 
-      id="item_stock" 
-      name="item_stock" 
+      <textarea
+      class ="form-control"
+      id="item_stock"
+      name="item_stock"
       placeholder="Enter the Item Stock"></textarea>
     </div>
     <br/>
     <button id="submit" type="submit" class="btn btn-primary">Submit</button>
   </form>
   <button id="update" style="visibility: hidden;" class="btn btn-primary" onClick="update()">Update</button>
-  
+
   {% endblock %}
