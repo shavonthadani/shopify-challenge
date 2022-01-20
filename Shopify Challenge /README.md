@@ -2,8 +2,8 @@ How to use:
 
 1. Click link: http://shavonthadani.pythonanywhere.com/
 2. Login using these credentials for premade inventory:\nemail: shopify@gmail.com  
-\npassword: 1234567 
-\nOR create your own account using sign up page
+password: 1234567 
+OR create your own account using sign up page
 3. Edit, Delete or Add items to the inventory
 4. Extra Feature: Click download to csv to convert database to a csv file
 
